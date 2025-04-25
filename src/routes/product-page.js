@@ -11,7 +11,7 @@ router.get("/:productId", (req, res) => {
     let product = getProductDetails(productId);
 
     if (product === undefined) {
-        res.render("error_page", {
+        res.render(htmlPages.error, {
             "message": errorMessages.notFoundProduct
         });
     } else {

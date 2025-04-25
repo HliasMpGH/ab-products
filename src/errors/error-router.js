@@ -1,4 +1,4 @@
-const {errorMessages} = require("../resources/config")
+const {errorMessages, htmlPages} = require("../resources/config")
 const express = require("express");
 
 const router = express.Router();
@@ -19,7 +19,7 @@ router.all("/api/*splat", (req, res) => {
  * Returns a rendered page with the error.
  */
 router.all("/*splat", (req, res) => {
-    res.status(404).render("error_page", {
+    res.status(404).render(htmlPages.error, {
         "message": notFoundPathMessage.replace("{param}", req.originalUrl)
     });
 });
