@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .error-container {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .error-title {
+            color: #e63946;
+            margin-bottom: 20px;
+        }
+        .error-message {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .error-details {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: left;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="error-container">
+            <h1 class="error-title">Error</h1>
+            <p class="error-message"><%= message %></p>
+            <a href="/" class="back-button">Return to Home</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= product.name %> - Product Details</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/search/products" class="back-button">Back to Search</a>
+        <h1>Product Details</h1>
+
+        <div class="product-details-container">
+            <div class="product-details-column" id="detailsA">
+                <h2>Format A</h2>
+                <div class="product-detail-a">
+                    <div class="product-detail-header">
+                        <h3 class="product-name"><%= product.name %></h3>
+                        <p class="product-price">$<%= product.price %></p>
+                    </div>
+                    <div class="product-detail-content">
+                        <div class="product-image-large">
+                            <img src="<%= product.image || '/placeholder.png' %>" alt="<%= product.name %>">
+                        </div>
+                        <div class="product-specs">
+                            <h4>Product Specifications</h4>
+                            <ul class="specs-list">
+                                <% if (product.specifications && Object.keys(product.specifications).length > 0) { %>
+                                    <% Object.entries(product.specifications).forEach(function([key, value]) { %>
+                                        <li><strong><%= key %>:</strong> <%= value %></li>
+                                    <% }); %>
+                                <% } else { %>
+                                    <li>No specifications available</li>
+                                <% } %>
+                            </ul>
+                        </div>
+                        <div class="product-description-full">
+                            <h4>Description</h4>
+                            <p><%= product.description || 'No description available' %></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="product-details-column" id="detailsB">
+                <h2>Format B</h2>
+                <div class="product-detail-b">
+                    <div class="product-image-banner">
+                        <img src="<%= product.image || '/placeholder.png' %>" alt="<%= product.name %>">
+                        <div class="product-banner-overlay">
+                            <h3 class="product-name-large"><%= product.name %></h3>
+                        </div>
+                    </div>
+
+                    <div class="product-detail-tabs">
+                        <div class="tab-header">
+                            <%
+                                const tabs = [
+                                    { id: 'overview', label: 'Overview' },
+                                    { id: 'specs', label: 'Specifications' }
+                                ];
+                            %>
+                            <% tabs.forEach(function(tab, index) { %>
+                                <button class="tab <%= index === 0 ? 'active' : '' %>" data-tab="<%= tab.id %>">
+                                    <%= tab.label %>
+                                </button>
+                            <% }); %>
+                        </div>
+
+                        <div class="tab-content-wrapper">
+                            <div class="tab-content <%= 'active' %>" id="overview">
+                                <p class="product-description-full"><%= product.description || 'No description available' %></p>
+                                <p class="product-price-large">Price: $<%= product.price %></p>
+                            </div>
+
+                            <div class="tab-content" id="specs">
+                                <ul class="specs-list-b">
+                                    <% if (product.specifications && Object.keys(product.specifications).length > 0) { %>
+                                        <% Object.entries(product.specifications).forEach(function([key, value]) { %>
+                                            <li><strong><%= key %>:</strong> <%= value %></li>
+                                        <% }); %>
+                                    <% } else { %>
+                                        <li>No specifications available</li>
+                                    <% } %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            const tabs = document.querySelectorAll(".tab");
+                            const contents = document.querySelectorAll(".tab-content");
+
+                            tabs.forEach(tab => {
+                                tab.addEventListener("click", function () {
+                                    const targetId = this.dataset.tab;
+
+                                    // Remove active from all
+                                    tabs.forEach(t => t.classList.remove("active"));
+                                    contents.forEach(c => c.classList.remove("active"));
+
+                                    // Activate selected
+                                    this.classList.add("active");
+                                    document.getElementById(targetId).classList.add("active");
+                                });
+                            });
+                        });
+                    </script>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

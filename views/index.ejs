@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Search A/B Testing</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Product Search</h1>
+            <div class="search-container">
+                <form action="/search/products" method="GET">
+                    <input type="text" id="searchInput" name="name" placeholder="Search for products..." value="<%= searchTerm || '' %>">
+                    <button type="submit" id="searchButton">Search</button>
+                </form>
+            </div>
+        </header>
+
+        <main>
+            <% if (locals.products && products.length > 0) { %>
+                <div class="results-container">
+                    <div class="results-column" id="formatA">
+                        <h2>Format A</h2>
+                        <div class="products-list">
+                            <% products.forEach(function(product) { %>
+                                <div class="product-card card-a">
+                                    <div class="product-image">
+                                        <img src="<%= product.image || '/placeholder.png' %>" alt="<%= product.name %>">
+                                    </div>
+                                    <div class="product-info">
+                                        <h3 class="product-name"><%= product.name %></h3>
+                                        <p class="product-price">$<%= product.price %></p>
+                                        <p class="product-description"><%= product.description || 'No description available' %></p>
+                                        <a href="/products/<%= product.id %>" class="details-button">Details</a>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="results-column" id="formatB">
+                        <h2>Format B</h2>
+                        <div class="products-list">
+                            <% products.forEach(function(product) { %>
+                                <div class="product-card card-b">
+                                    <div class="product-image-b">
+                                        <img src="<%= product.image || '/placeholder.png' %>" alt="<%= product.name %>">
+                                    </div>
+                                    <h3 class="product-name-b"><%= product.name %></h3>
+                                    <div class="product-details-b">
+                                        <p class="product-price-b">$<%= product.price %></p>
+                                        <p class="product-description-b"><%= product.description || 'No description available' %></p>
+                                    </div>
+                                    <a href="/products/<%= product.id %>" class="details-button-b">Details</a>
+                                </div>
+                            <% }); %>
+                        </div>
+                    </div>
+                </div>
+            <% } else if (locals.searchTerm) { %>
+                <div class="no-results">
+                    <p>No products found matching "<%= searchTerm %>"</p>
+                </div>
+            <% } %>
+        </main>
+    </div>
+</body>
+</html>

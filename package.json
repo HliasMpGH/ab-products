@@ -1,0 +1,43 @@
+{
+  "dependencies": {
+    "ab-products": "file:",
+    "axios": "^1.8.4",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.9",
+    "path-to-regexp": "^8.2.0",
+    "request": "^2.88.2"
+  },
+  "name": "ab-products",
+  "version": "1.0.0",
+  "description": "An SPA for searching products that utilizes A/B testing techniques",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HliasMpGH/ab-products.git"
+  },
+  "author": "Hlias Mpourdakos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HliasMpGH/ab-products/issues"
+  },
+  "homepage": "https://github.com/HliasMpGH/ab-products#readme",
+  "bin": "src/main.js",
+  "pkg": {
+    "scripts": [
+      "src/main.js"
+    ],
+    "assets": [
+      "node_modules/ejs/**/*",
+      "views/**/*",
+      "public/**/*"
+    ],
+    "targets": [
+      "latest-win-x64"
+    ],
+    "outputPath": "bin"
+  }
+}
