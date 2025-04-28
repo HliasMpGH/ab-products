@@ -1,3 +1,4 @@
+require('dotenv').config()
 const {settings} = require("./resources/config");
 const express = require("express");
 const path = require("path");

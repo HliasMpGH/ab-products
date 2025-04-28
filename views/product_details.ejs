@@ -39,6 +39,7 @@
                             <h4>Description</h4>
                             <p><%= product.description || 'No description available' %></p>
                         </div>
+                        <button id="a-buy" class="buy-button">Buy</button>
                     </div>
                 </div>
             </div>
@@ -72,6 +73,7 @@
                             <div class="tab-content <%= 'active' %>" id="overview">
                                 <p class="product-description-full"><%= product.description || 'No description available' %></p>
                                 <p class="product-price-large">Price: $<%= product.price %></p>
+                                <button id="b-buy" class="buy-button">Buy</button>
                             </div>
 
                             <div class="tab-content" id="specs">
@@ -87,31 +89,11 @@
                             </div>
                         </div>
                     </div>
-
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function () {
-                            const tabs = document.querySelectorAll(".tab");
-                            const contents = document.querySelectorAll(".tab-content");
-
-                            tabs.forEach(tab => {
-                                tab.addEventListener("click", function () {
-                                    const targetId = this.dataset.tab;
-
-                                    // Remove active from all
-                                    tabs.forEach(t => t.classList.remove("active"));
-                                    contents.forEach(c => c.classList.remove("active"));
-
-                                    // Activate selected
-                                    this.classList.add("active");
-                                    document.getElementById(targetId).classList.add("active");
-                                });
-                            });
-                        });
-                    </script>
-
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="/js/product_details.js"></script>
 </body>
 </html>

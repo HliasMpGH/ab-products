@@ -1,13 +1,14 @@
 /** The basic configurations of the service */
 const settings = {
-    "port": 8000
+    "port": process.env.PORT || 8000
 };
 
 /** The endpoints configuration of the service */
 const endpoints = {
     "api": "/api", // the prefix for the rest endpoints
     "products": "/products", // the prefix for the product-related operations
-    "search": "/search" // the prefix for the search-related operations
+    "search": "/search", // the prefix for the search-related operations
+    "submit": "/submit-to-google-form" // the prefix for the form submissions
 }
 
 /** The error messages that can be returned from the service */
@@ -23,4 +24,12 @@ const htmlPages = {
     "error": "error_page.ejs"
 }
 
-module.exports = {settings, endpoints, errorMessages, htmlPages};
+const submit = {
+    "id": process.env.SUBMISSION_ID || "",
+    "entries": {
+        "search": process.env.SEARCH_ENTRY || "",
+        "buy": process.env.BUY_ENTRY || "",
+    }
+}
+
+module.exports = {settings, endpoints, errorMessages, htmlPages, submit};
