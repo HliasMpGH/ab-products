@@ -12,6 +12,12 @@ function postSubmission() {
     buyChoice = localStorage.getItem("buyChoice");
     console.log(`search=${searchChoice}&buy=${buyChoice}`);
 
+    // dont post empty choices
+    if (!searchChoice && !buyChoice) {
+        console.error("User choices not found on local.");
+        return;
+    }
+
     // post the user choices to the server
     fetch(
         `/submit-to-google-form?search=${searchChoice}&buy=${buyChoice}`,

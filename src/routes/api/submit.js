@@ -22,6 +22,12 @@ router.post(endpoints.submit, async (req, res) => {
 
 	console.log(`got search=${search}&buy=${buy}`);
 
+	// dont post empty choices
+	if (!search && !buy) {
+		console.error("User choices not found in request.");
+		return res.status(400).send('User choices not found');
+	}
+
 	// construct the form URL with the user choices
 	const formUrl = "https://docs.google.com/forms/d/"
 		+ `${submit.id}/formResponse?usp=pp_url&submit=Submit`
