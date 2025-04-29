@@ -6,6 +6,15 @@ const router = express.Router();
 
 router.use(express.json());
 
+// middleware to track the seconds passed between search and submit
+router.use(endpoints.submit, (req, res, next) => {
+	if (req.session.startTime) {
+		req.session.totalTime = (Date.now() - req.session.startTime) / 1000; // in seconds
+		console.log("totalTime: " + req.session.totalTime);
+	}
+	next();
+});
+
 // track if the user has already posted a submission to avoid duplicates
 let userPostedSubmission = false;
 
@@ -20,7 +29,7 @@ router.post(endpoints.submit, async (req, res) => {
 	const search = req.query.search;
 	const buy = req.query.buy;
 
-	console.log(`got search=${search}&buy=${buy}`);
+	console.log(`got search=${search}&buy=${buy}$time=${req.session.totalTime}`);
 
 	// dont post empty choices
 	if (!search && !buy) {
@@ -32,7 +41,8 @@ router.post(endpoints.submit, async (req, res) => {
 	const formUrl = "https://docs.google.com/forms/d/"
 		+ `${submit.id}/formResponse?usp=pp_url&submit=Submit`
 		+ `&entry.${submit.entries.search}=${encodeURIComponent(search)}`
-		+ `&entry.${submit.entries.buy}=${encodeURIComponent(buy)}`;
+		+ `&entry.${submit.entries.buy}=${encodeURIComponent(buy)}`
+		+ `&entry.${submit.entries.time}=${encodeURIComponent(req.session.totalTime)}`;
 
 	// console.log(formUrl);
 

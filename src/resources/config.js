@@ -1,6 +1,9 @@
 /** The basic configurations of the service */
 const settings = {
-    "port": process.env.PORT || 8000
+    "port": process.env.PORT || 8000,
+    "session": {
+        "secret": process.env.SESSION_SECRET || ""
+    }
 };
 
 /** The endpoints configuration of the service */
@@ -29,6 +32,7 @@ const submit = {
     "entries": {
         "search": process.env.SEARCH_ENTRY || "",
         "buy": process.env.BUY_ENTRY || "",
+        "time": process.env.TIME_ENTRY || "",
     }
 }
 
