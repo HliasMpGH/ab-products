@@ -1,6 +1,8 @@
 /** The basic configurations of the service */
 const settings = {
     "port": process.env.PORT || 8000,
+    "host": process.env.HOST || "localhost",
+    "open": true, // open the browser by default
     "session": {
         "secret": process.env.SESSION_SECRET || ""
     }

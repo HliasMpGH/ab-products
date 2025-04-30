@@ -1,8 +1,10 @@
 require('dotenv').config()
-const {settings} = require("./resources/config");
+const {settings, endpoints} = require("./resources/config");
 const express = require("express");
 const session = require("express-session");
 const path = require("path");
+// import open from 'open';
+const open = require("open");
 
 const apiRouter = require("./routes/api-router.js");
 const errorRouter = require("./errors/error-router.js");
@@ -31,6 +33,10 @@ app.listen(settings.port, () => {
     console.log(
         `Listening for requests on ${settings.port}`
         + `\n\n`
-        + `Open: http://localhost:${settings.port}`
-    )
+        + `Opening http://${settings.host}:${settings.port}`
+    );
+    if (settings.open) {
+        // invoke the browser on the app
+        open(`http://${settings.host}:${settings.port}${endpoints.search}${endpoints.products}`);
+    }
 });
