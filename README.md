@@ -52,7 +52,7 @@ git clone https://github.com/HliasMpGH/ab-products
 npm install
 
 # Start the server
-node (or nodemon) src/main.js
+npm start
 ```
 
 ## Building a Standalone Binary
