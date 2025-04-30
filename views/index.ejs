@@ -21,43 +21,16 @@
         <main>
             <% if (locals.products && products.length > 0) { %>
                 <div class="results-container">
-                    <div class="results-column" id="formatA">
-                        <h2>Format A</h2>
-                        <div class="products-list">
-                            <% products.forEach(function(product) { %>
-                                <div class="product-card card-a">
-                                    <div class="product-image">
-                                        <img src="<%= product.image || '/placeholder.png' %>" alt="<%= product.name %>">
-                                    </div>
-                                    <div class="product-info">
-                                        <h3 class="product-name"><%= product.name %></h3>
-                                        <p class="product-price">$<%= product.price %></p>
-                                        <p class="product-description"><%= product.description || 'No description available' %></p>
-                                        <a href="/products/<%= product.id %>" class="details-button">Details</a>
-                                    </div>
-                                </div>
-                            <% }); %>
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="results-column" id="formatB">
-                        <h2>Format B</h2>
-                        <div class="products-list">
-                            <% products.forEach(function(product) { %>
-                                <div class="product-card card-b">
-                                    <div class="product-image-b">
-                                        <img src="<%= product.image || '/placeholder.png' %>" alt="<%= product.name %>">
-                                    </div>
-                                    <h3 class="product-name-b"><%= product.name %></h3>
-                                    <div class="product-details-b">
-                                        <p class="product-price-b">$<%= product.price %></p>
-                                        <p class="product-description-b"><%= product.description || 'No description available' %></p>
-                                    </div>
-                                    <a href="/products/<%= product.id %>" class="details-button-b">Details</a>
-                                </div>
-                            <% }); %>
-                        </div>
-                    </div>
+                    <%# Randomly interchange format positions (left/right) %>
+                    <% if (Math.random() < 0.5) { %>
+                        <%- include("search_variants/a_format.ejs")%>
+                        <div class="divider"></div>
+                        <%- include("search_variants/b_format.ejs")%>
+                    <% } else {%>
+                        <%- include("search_variants/b_format.ejs")%>
+                        <div class="divider"></div>
+                        <%- include("search_variants/a_format.ejs")%>
+                    <% } %>
                 </div>
             <% } else if (locals.searchTerm) { %>
                 <div class="no-results">

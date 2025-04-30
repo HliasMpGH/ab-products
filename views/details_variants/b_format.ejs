@@ -1,0 +1,51 @@
+<div class="product-details-column" id="detailsB">
+    <h2>Format B</h2>
+    <div class="product-detail-b">
+        <div class="product-image-banner">
+            <img src="<%= product.image || '/placeholder.png' %>" alt="<%= product.name %>">
+            <div class="product-banner-overlay">
+                <h3 class="product-name-large">
+                    <%= product.name %>
+                </h3>
+            </div>
+        </div>
+
+        <div class="product-detail-tabs">
+            <div class="tab-header">
+                <% const tabs=[ { id: 'overview' , label: 'Overview' }, { id: 'specs' , label: 'Specifications' } ]; %>
+                    <% tabs.forEach(function(tab, index) { %>
+                        <button class="tab <%= index === 0 ? 'active' : '' %>" data-tab="<%= tab.id %>">
+                            <%= tab.label %>
+                        </button>
+                        <% }); %>
+            </div>
+
+            <div class="tab-content-wrapper">
+                <div class="tab-content <%= 'active' %>" id="overview">
+                    <p class="product-description-full">
+                        <%= product.description || 'No description available' %>
+                    </p>
+                    <p class="product-price-large">Price: $<%= product.price %>
+                    </p>
+                    <button id="b-buy" class="buy-button">Buy</button>
+                </div>
+
+                <div class="tab-content" id="specs">
+                    <ul class="specs-list-b">
+                        <% if (product.specifications && Object.keys(product.specifications).length> 0) { %>
+                            <% Object.entries(product.specifications).forEach(function([key, value]) { %>
+                                <li><strong>
+                                        <%= key %>:
+                                    </strong>
+                                    <%= value %>
+                                </li>
+                                <% }); %>
+                                    <% } else { %>
+                                        <li>No specifications available</li>
+                                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

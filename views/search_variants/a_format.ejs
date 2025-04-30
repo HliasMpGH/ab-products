@@ -1,0 +1,18 @@
+<div class="results-column" id="formatA">
+    <h2>Format A</h2>
+    <div class="products-list">
+        <% products.forEach(function(product) { %>
+            <div class="product-card card-a">
+                <div class="product-image">
+                    <img src="<%= product.image || '/placeholder.png' %>" alt="<%= product.name %>">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name"><%= product.name %> - <b><%=product.category%></b></h3>
+                    <p class="product-price">$<%= product.price %></p>
+                    <p class="product-description"><%= product.description || 'No description available' %></p>
+                    <a href="/products/<%= product.id %>" class="details-button">Details</a>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>

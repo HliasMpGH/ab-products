@@ -1,0 +1,40 @@
+<div class="product-details-column" id="detailsA">
+    <h2>Format A</h2>
+    <div class="product-detail-a">
+        <div class="product-detail-header">
+            <h3 class="product-name">
+                <%= product.name %>
+            </h3>
+            <p class="product-price">$<%= product.price %>
+            </p>
+        </div>
+        <div class="product-detail-content">
+            <div class="product-image-large">
+                <img src="<%= product.image || '/placeholder.png' %>" alt="<%= product.name %>">
+            </div>
+            <div class="product-specs">
+                <h4>Product Specifications</h4>
+                <ul class="specs-list">
+                    <% if (product.specifications && Object.keys(product.specifications).length> 0) { %>
+                        <% Object.entries(product.specifications).forEach(function([key, value]) { %>
+                            <li><strong>
+                                    <%= key %>:
+                                </strong>
+                                <%= value %>
+                            </li>
+                            <% }); %>
+                                <% } else { %>
+                                    <li>No specifications available</li>
+                                    <% } %>
+                </ul>
+            </div>
+            <div class="product-description-full">
+                <h4>Description</h4>
+                <p>
+                    <%= product.description || 'No description available' %>
+                </p>
+            </div>
+            <button id="a-buy" class="buy-button">Buy</button>
+        </div>
+    </div>
+</div>
