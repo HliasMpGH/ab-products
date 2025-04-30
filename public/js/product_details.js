@@ -18,9 +18,21 @@ function postSubmission() {
         return;
     }
 
+    let submitForm = "/submit-to-google-form";
+
+    // include only non-null query parameters
+    if (searchChoice) {
+        submitForm += `?search=${searchChoice}`;
+        if (buyChoice) {
+            submitForm += `&buy=${buyChoice}`;
+        }
+    } else {
+        submitForm += `?buy=${buyChoice}`;
+    }
+
     // post the user choices to the server
     fetch(
-        `/submit-to-google-form?search=${searchChoice}&buy=${buyChoice}`,
+        submitForm,
         { method: 'POST' }
     ).then(response => {
         if (response.ok) {
@@ -81,6 +93,6 @@ for (let button of buyButtons) {
     button.addEventListener("click", () => {
         postSubmission(); // post search and buy choice to server
         alert(`Your purchase will be processed!`);
-        window.location.href = '/'; // Redirect to main page
+        window.location.href = '/search/products'; // Redirect to main page
     });
 }

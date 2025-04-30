@@ -33,6 +33,8 @@ const submit = {
         "search": process.env.SEARCH_ENTRY || "",
         "buy": process.env.BUY_ENTRY || "",
         "time": process.env.TIME_ENTRY || "",
+        "viewTime": process.env.VIEW_TIME_ENTRY || "",
+        "buttonsPressed": process.env.BUTTONS_ENTRY || ""
     }
 }
 

@@ -16,6 +16,17 @@ router = express.Router();
 router.use(`${endpoints.api}${endpoints.search}`, searchApiRouter);
 router.use(`${endpoints.api}${endpoints.products}`, productApiRouter);
 
+// middleware to track the total number of requests
+router.use((req, res, next) => {
+    if (!req.session.totalRequests) {
+        req.session.totalRequests = 0;
+    }
+    // increment request count
+    req.session.totalRequests += 1;
+    console.log(`total request: ${req.session.totalRequests}`);
+    next();
+});
+
 router.use(submitApiRouter);
 
 // set routers for HTML communication

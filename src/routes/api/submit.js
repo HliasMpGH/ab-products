@@ -1,4 +1,4 @@
-const {endpoints, submit} = require("../../resources/config");
+const { endpoints, submit } = require("../../resources/config");
 const axios = require("axios");
 const express = require("express");
 
@@ -26,10 +26,14 @@ router.post(endpoints.submit, async (req, res) => {
 		return res.status(200).send('Form already submitted');
 	}
 
-	const search = req.query.search;
-	const buy = req.query.buy;
+	const search = req.query.search || "";
+	const buy = req.query.buy || "";
 
-	console.log(`got search=${search}&buy=${buy}$time=${req.session.totalTime}`);
+	// log input
+	console.log(`got search=${search}&buy=${buy}`
+		+ `&viewTime=${req.session.lastDetailsTime}`
+		+ `&time=${req.session.totalTime}&requests=${req.session.totalRequests}`
+	);
 
 	// dont post empty choices
 	if (!search && !buy) {
@@ -37,12 +41,18 @@ router.post(endpoints.submit, async (req, res) => {
 		return res.status(400).send('User choices not found');
 	}
 
+	const detailsTime = req.session.lastDetailsTime || -1;
+	const totalTime = req.session.totalTime || -1;
+	const totalRequests = req.session.totalRequests || -1;
+
 	// construct the form URL with the user choices
 	const formUrl = "https://docs.google.com/forms/d/"
 		+ `${submit.id}/formResponse?usp=pp_url&submit=Submit`
 		+ `&entry.${submit.entries.search}=${encodeURIComponent(search)}`
 		+ `&entry.${submit.entries.buy}=${encodeURIComponent(buy)}`
-		+ `&entry.${submit.entries.time}=${encodeURIComponent(req.session.totalTime)}`;
+		+ `&entry.${submit.entries.time}=${encodeURIComponent(totalTime)}`
+		+ `&entry.${submit.entries.viewTime}=${encodeURIComponent(detailsTime)}`
+		+ `&entry.${submit.entries.buttonsPressed}=${encodeURIComponent(totalRequests)}`;
 
 	// console.log(formUrl);
 
