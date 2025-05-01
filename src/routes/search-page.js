@@ -18,10 +18,8 @@ router.use(endpoints.products, (req, res, next) => {
 // set a router that holds the html endpoint for the product search
 router.get(endpoints.products, (req, res) => {
     let searchTerm = req.query.name;
-    console.log("search:"+searchTerm);
     let products = getProducts(searchTerm);
 
-    console.log("products:"+JSON.stringify(products));
     res.render(htmlPages.search, {
         "products": products,
         "searchTerm": searchTerm

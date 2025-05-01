@@ -33,7 +33,7 @@ app.listen(settings.port, () => {
     console.log(
         `Listening for requests on ${settings.port}`
         + `\n\n`
-        + `Opening http://${settings.host}:${settings.port}`
+        + `Opening http://${settings.host}:${settings.port}${endpoints.search}${endpoints.products}`
     );
     if (settings.open) {
         // invoke the browser on the app
