@@ -2,7 +2,9 @@
 const settings = {
     "port": process.env.PORT || 8000,
     "host": process.env.HOST || "localhost",
-    "open": true, // open the browser by default
+    "openBrowser": false, // open the browser by default,
+    "randomQuest": true, // generate random user quest
+    "randomProductList": true, // randomize the product list on each search
     "session": {
         "secret": process.env.SESSION_SECRET || ""
     }
