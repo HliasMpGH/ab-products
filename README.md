@@ -55,6 +55,8 @@ npm install
 npm start
 ```
 
+* Note: If you just want the binary, click [here](https://github.com/HliasMpGH/ab-products/releases/download/v1.0/ab-products.exe).
+
 ## Building a Standalone Binary
 
 This project can be compiled into a standalone executable using [pkg](https://github.com/vercel/pkg):
