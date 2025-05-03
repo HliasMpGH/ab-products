@@ -27,8 +27,52 @@ In a production environment, the two layouts can be randomly interchanged betwee
 - Product search by name
 - Dual-display results for A/B testing comparison
 - Individual product detail pages
+- User engagement analytics sent to configurable Google Form
 - RESTful API endpoints for programmatic access
 - Packagable as a standalone binary
+
+## Metrics Collected
+
+The application automatically captures the following user engagement data points:
+
+| Metric | Description | Unit |
+|--------|-------------|------|
+| Search Format Preference | User's selection between search format A or B | String (A/B) |
+| Purchase Format Preference | User's selection between purchase format A or B | String (A/B) |
+| Search Completion Time | Time elapsed from search initiation to product selection | Seconds |
+| Purchase Completion Time | Time elapsed from search initiation to purchase confirmation | Seconds |
+| Total Number of Requests | Number of requests issued until purchase confirmation | Integer |
+
+## Configuration Options
+
+Administrators can customize the google form analytics through the `config.js` module:
+
+```js
+const submit = {
+    "id": process.env.SUBMISSION_ID || "", // the submission id of the form
+    // the ids of the unique entries of the form
+    "entries": {
+        "search": process.env.SEARCH_ENTRY || "",
+        "buy": process.env.BUY_ENTRY || "",
+        "time": process.env.TIME_ENTRY || "",
+        "viewTime": process.env.VIEW_TIME_ENTRY || "",
+        "buttonsPressed": process.env.BUTTONS_ENTRY || ""
+        // add more entries if needed
+    }
+}
+```
+Then, in the `submit.js` module:
+
+```js
+const formUrl = "https://docs.google.com/forms/d/"
+		+ `${submit.id}/formResponse?usp=pp_url&submit=Submit`
+		+ `&entry.${submit.entries.search}=${encodeURIComponent(search)}`
+		+ `&entry.${submit.entries.buy}=${encodeURIComponent(buy)}`
+		+ `&entry.${submit.entries.time}=${encodeURIComponent(totalTime)}`
+		+ `&entry.${submit.entries.viewTime}=${encodeURIComponent(detailsTime)}`
+		+ `&entry.${submit.entries.buttonsPressed}=${encodeURIComponent(totalRequests)}`;
+        // add the new entries for the request
+```
 
 ## Endpoints
 
