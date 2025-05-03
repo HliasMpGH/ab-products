@@ -1,13 +1,16 @@
 const products = require("../resources/data/products");
 const {settings} = require("../resources/config");
 
-/** Return the products that match a given name query. */
+/** Return the products that match a search query. */
 const getProducts = (searchTerm = "") => {
     let productsResult;
 
     if (searchTerm) {
+        // search by name or category
         productsResult = products.filter(product => {
-            return product.name.toLowerCase().includes(searchTerm.toLowerCase())
+            let term = searchTerm.toLowerCase().trim();
+            return product.name.toLowerCase().includes(term)
+                || product.category.toLowerCase().includes(term);
         });
     } else {
         // if no name query was specified, return all products
